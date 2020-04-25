@@ -1,0 +1,15 @@
+origin: center
+iterations: 10
+length_reduction: 0.8
+color: "#ff80ffff"
+width: 1.0
+rule:
+    axiom: FX
+    angle: 90
+    actions:
+        F: draw_forward
+        +: rotate_right
+        -: rotate_left
+    rules:
+        X: X+YF+
+        Y: -FX-Y

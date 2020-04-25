@@ -1,0 +1,17 @@
+origin: bottom center
+iterations: 7
+length_reduction: 0.57
+color: "#9933b3ff"
+width: 1.0
+rule:
+    axiom: X
+    angle: 25
+    actions:
+        F: draw_forward
+        +: rotate_right
+        -: rotate_left
+        S: store
+        L: load
+    rules:
+        X: F+SSXL-XL-FS-FXL+X
+        F: FF

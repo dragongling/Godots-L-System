@@ -1,0 +1,16 @@
+origin: center
+iterations: 4
+length_reduction: 0.6
+color: "#b3e699ff"
+width: 2.0
+rule:
+    axiom: F-G-G
+    angle: 120
+    actions:
+        F: draw_forward
+        G: draw_forward
+        +: rotate_right
+        -: rotate_left
+    rules:
+        F: F-G+F+G-F
+        G: GG

@@ -1,0 +1,16 @@
+origin: center
+iterations: 5
+length_reduction: 0.6
+color: "#ff0000ff"
+width: 2.0
+rule:
+    axiom: F
+    angle: 25
+    actions:
+        F: draw_forward
+        +: rotate_right
+        '-': rotate_left
+        S: store
+        L: load
+    rules:
+        F: 'FF+S+F-F-FL-S-F+F+FL'
