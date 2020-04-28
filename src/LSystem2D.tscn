@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/LSystem2D.gd" type="Script" id=1]
+[ext_resource path="res://src/DragCamera.gd" type="Script" id=2]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -16,28 +17,21 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
-lines_slider = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/HSlider")
-config_selector = NodePath("Control/MarginContainer/VBoxContainer/OptionButton")
-textbox = NodePath("Control/MarginContainer/VBoxContainer/TextEdit")
-generate_button = NodePath("Control/MarginContainer/VBoxContainer/Button")
+lines_slider = NodePath("Control/MarginContainer/Panel/VBoxContainer/HBoxContainer/HSlider")
+config_selector = NodePath("Control/MarginContainer/Panel/VBoxContainer/OptionButton")
+textbox = NodePath("Control/MarginContainer/Panel/VBoxContainer/TextEdit")
+generate_button = NodePath("Control/MarginContainer/Panel/VBoxContainer/Button")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
 
 [node name="LineContainer" type="Line2D" parent="."]
 
-[node name="Control" type="Control" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Control" type="CanvasLayer" parent="."]
 
 [node name="MarginContainer" type="MarginContainer" parent="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = 228.0
-margin_bottom = 120.0
+margin_right = 481.0
+margin_bottom = 680.0
 custom_constants/margin_right = 50
 custom_constants/margin_top = 50
 custom_constants/margin_left = 50
@@ -46,20 +40,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+[node name="Panel" type="Panel" parent="Control/MarginContainer"]
 margin_left = 50.0
 margin_top = 50.0
 margin_right = 431.0
 margin_bottom = 630.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/Panel"]
+margin_right = 381.0
+margin_bottom = 580.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/Panel/VBoxContainer"]
 margin_right = 381.0
 margin_bottom = 16.0
 
-[node name="HSlider" type="HSlider" parent="Control/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="HSlider" type="HSlider" parent="Control/MarginContainer/Panel/VBoxContainer/HBoxContainer"]
 margin_right = 256.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 256, 0 )
@@ -67,28 +65,49 @@ min_value = 1.0
 max_value = 10000.0
 value = 10.0
 
-[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="Control/MarginContainer/Panel/VBoxContainer/HBoxContainer"]
 margin_left = 260.0
 margin_top = 1.0
 margin_right = 381.0
 margin_bottom = 15.0
 text = "Iterations / Second"
 
-[node name="OptionButton" type="OptionButton" parent="Control/MarginContainer/VBoxContainer"]
+[node name="OptionButton" type="OptionButton" parent="Control/MarginContainer/Panel/VBoxContainer"]
 margin_top = 20.0
 margin_right = 381.0
 margin_bottom = 40.0
 text = "Config"
 
-[node name="TextEdit" type="TextEdit" parent="Control/MarginContainer/VBoxContainer"]
+[node name="TextEdit" type="TextEdit" parent="Control/MarginContainer/Panel/VBoxContainer"]
 margin_top = 44.0
 margin_right = 381.0
 margin_bottom = 556.0
 rect_min_size = Vector2( 0, 512 )
 size_flags_vertical = 3
 
-[node name="Button" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="Control/MarginContainer/Panel/VBoxContainer"]
 margin_top = 560.0
 margin_right = 381.0
 margin_bottom = 580.0
 text = "Generate"
+
+[node name="ControlsEdit" type="TextEdit" parent="Control/MarginContainer/Panel/VBoxContainer"]
+margin_top = 584.0
+margin_right = 381.0
+margin_bottom = 688.0
+rect_min_size = Vector2( 0, 100 )
+size_flags_vertical = 3
+text = "	Controls:
+		Esc - exit
+		Mouse Drag - move camera
+		Mouse Wheel - zoom
+		Middle Mouse Button - reset camera"
+readonly = true
+context_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 512, 300 )
+current = true
+script = ExtResource( 2 )
